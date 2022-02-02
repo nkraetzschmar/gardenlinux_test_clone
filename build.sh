@@ -114,6 +114,14 @@ if [ -n "$local_pkgs" ]; then
 	dockerArgs+=" --volume $(realpath "$local_pkgs"):/opt/packages/pool:ro -e PKG_DIR=/opt/packages"
 fi
 
+if [ -z "$(git status --porcelain)" ]; then
+	commitid="$(git rev-parse --short HEAD)"
+	echo "clean working tree, using $commitid as commit id"
+	dockerArgs+=" -e commitid=$commitid"
+else
+	echo 'modified working tree, using "local" instead of commit id'
+fi
+
 if [ $manual ]; then
 	echo -e "\n### running in debug mode"
 	echo -e "please run -> /opt/gardenlinux/bin/garden-build <- (all configs are set)\n"
