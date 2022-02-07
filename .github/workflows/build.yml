@@ -2,12 +2,12 @@ name: gardenlinux
 on: [push, pull_request]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: gardenlinux-x86_64
     strategy:
       matrix:
-        architecture: [ amd64, arm64 ]
-        target: [ kvm, metal, gcp, aws, azure, ali, openstack, vmware, pxe ]
-        modifier: [ "", "-dev" ]
+        architecture: [ amd64 ]
+        target: [ kvm ]
+        modifier: [ "" ]
     steps:
       - uses: actions/checkout@v2
       - run: |
