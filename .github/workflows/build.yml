@@ -7,7 +7,7 @@ jobs:
       matrix:
         architecture: [ amd64 ]
         target: [ kvm ]
-        modifier: [ "" ]
+        modifier: [ "-dev" ]
     steps:
       - uses: actions/checkout@v2
       - run: make ARCH=${{ matrix.architecture }} ${{ matrix.target }}${{ matrix.modifier }}
