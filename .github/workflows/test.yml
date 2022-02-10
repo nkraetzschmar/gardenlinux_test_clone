@@ -1,0 +1,7 @@
+name: test
+on: [ push, workflow_dispatch ]
+jobs:
+  build:
+    runs-on: gardenlinux-x86_64
+    steps:
+      - run: exit 1
