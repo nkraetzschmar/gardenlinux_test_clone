@@ -5,7 +5,7 @@ jobs:
     runs-on: gardenlinux-${{ matrix.architecture }}
     strategy:
       matrix:
-        architecture: [ amd64, arm64 ]
+        architecture: [ arm64 ]
         target: [ kvm, metal, gcp, aws, azure, ali, openstack, vmware, pxe ]
         modifier: [ "", "-dev" ]
     steps:
