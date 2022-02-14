@@ -2,12 +2,12 @@ name: gardenlinux
 on: [push, pull_request]
 jobs:
   build:
-    runs-on: gardenlinux-x86_64
+    runs-on: gardenlinux-${{ matrix.architecture }}
     strategy:
       matrix:
-        architecture: [ amd64 ]
-        target: [ kvm ]
-        modifier: [ "" ]
+        architecture: [ amd64, arm64 ]
+        target: [ kvm, metal, gcp, aws, azure, ali, openstack, vmware, pxe ]
+        modifier: [ "", "-dev" ]
     steps:
       - uses: actions/checkout@v2
       - run: make ARCH=${{ matrix.architecture }} ${{ matrix.target }}${{ matrix.modifier }}
