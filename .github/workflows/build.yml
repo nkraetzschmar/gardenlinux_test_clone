@@ -5,13 +5,13 @@ jobs:
     runs-on: gardenlinux-${{ matrix.architecture }}
     strategy:
       matrix:
-        architecture: [ arm64 ]
+        architecture: [ amd64, arm64 ]
         target: [ kvm, metal, gcp, aws, azure, ali, openstack, vmware, pxe ]
         modifier: [ "", "-dev" ]
     steps:
       - uses: actions/checkout@v2
       - run: make ARCH=${{ matrix.architecture }} ${{ matrix.target }}${{ matrix.modifier }}
-      - run: find .build \( -name '*.raw' -o -name '*.vhd' -o -name '*.qcow2' -o -name '*.vmdk' \) -exec xz {} \;
+      - run: find .build \( -name '*.raw' -o -name '*.vhd' -o -name '*.qcow2' -o -name '*.vmdk' \) -exec gzip --fast {} \;
       - uses: actions/upload-artifact@v2
         with:
           name: build-${{ matrix.architecture }}-${{ matrix.target }}${{ matrix.modifier }}
