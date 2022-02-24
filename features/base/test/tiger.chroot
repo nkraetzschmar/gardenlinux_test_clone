@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 thisDir=$(readlink -f $(dirname "${BASH_SOURCE[0]}"))
 
@@ -9,7 +9,7 @@ if [[ ! -f "${thisDir}/tiger.d/tigerrc" ]]; then
 	exit 1
 fi
 
-DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -qq tiger apt-utils> /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tiger apt-utils
 
 for dir in sys dev proc; do
 	if [ -e "/$dir" ]; then
@@ -19,7 +19,7 @@ done
 
 # fake it when running inside a chroot environment
 if [[ "done" == $(tail -1 /usr/lib/tiger/systems/Linux/default/gen_mounts) ]]; then
-	echo 'echo "/ ext4 /dev/fake1"' >> /usr/lib/tiger/systems/Linux/default/gen_mounts 
+	echo 'echo "/ ext4 /dev/fake1"' >> /usr/lib/tiger/systems/Linux/default/gen_mounts
 fi
 
 tiger -c "${thisDir}/tiger.d/tigerrc" -l ${thisDir} -q &> /dev/null
