@@ -15,6 +15,11 @@
 /cert/*.csr
 /cert/*.full
 /cert/*.chain
+/cert/*.esl
+/cert/*.auth
+!/cert/gardenlinux-*.crt
+!/cert/gardenlinux-*.chain
+!/cert/gardenlinux-*.auth
 !/cert/gardenlinux.kernel.sign.crt
 !/cert/gardenlinux.sign.pub
 /features/metal/file.include/lib/firmware/
