@@ -215,6 +215,7 @@ chroot "$rootfs" dracut \
 	--kver "$kernel_version" \
 	--modules "bash dash systemd systemd-initrd systemd-repart systemd-veritysetup kernel-modules kernel-modules-extra terminfo udev-rules dracut-systemd base fs-lib shutdown" \
 	--install "/etc/veritytab" \
+	--add-drivers "xen-blkfront" \
 	--reproducible \
 	"$initrd"
 
