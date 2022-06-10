@@ -1,0 +1,7 @@
+name: test
+on: push
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - run: echo hello
